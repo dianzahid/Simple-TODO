@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays</title>
+
+  <style>
+
+    .displayy2{
+      display: block;
+    }
+
+*{
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .input-date{
+      padding: 6px 4px;
+      margin: 0px 4px;
+    }
+
+    .todo-3{
+    padding: 6px 4px;
+    }
+
+    .addButton{
+      padding: 5px 10px;
+      background-color: rgb(2, 198, 2);
+      color: white;
+      border: none;
+      width: 70px;
+      height: 34px;
+      font-size: 18px;
+    }
+
+    .todo-row{
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 155px 119px 70px;
+      grid-column-gap: 8px;
+      width: 362px;
+      align-items: center;
+    }
+
+    .name{
+      flex: 0 0 154px;
+    }
+
+    .due{
+      flex: 0 0 125px;
+    }
+
+
+    .deleteButton{
+      
+      padding: 5px 10px;
+      background-color: rgb(232, 3, 3);
+      color: white;
+      border: none;
+      width: 70px;
+      height: 34px;
+      font-size: 18px;
+
+
+    
+    }
+
+  </style>
+</head>
+<body>
+
+
+<p style="font-family: arial;">Todo List</p>
+<input class="todo-3" placeholder="Todo name">
+<input type="date" class="input-date">
+<button class="addButton js-add-button">Add</button>
+<div class="display3"></div>
+  
+<script>
+const myArray3 = [];
+
+
+function todo3(){
+
+  const inputElement = document.querySelector('.todo-3');
+  const inputDateElement = document.querySelector('.input-date');
+  const inputDateValue = inputDateElement.value;
+  const inputValue = inputElement.value;
+  const todo3Object = {
+    name: inputValue,
+    dueDate: inputDateValue
+  };
+  myArray3.push(todo3Object);
+  displayArray();
+  inputElement.value = '';
+}
+
+function displayArray(){
+let todoListHTML = ''
+;
+
+myArray3.forEach((todoObject, index)=>{
+
+  const { name, dueDate} = todoObject;
+  const html = `
+    <div class="todo-row">
+    <p class="name">${name}</p><p class="due">${dueDate}</p> 
+    <button class = "js-delete-button deleteButton">delete</button>
+    </div>`;
+  todoListHTML += html;
+
+});
+
+
+document.querySelector('.display3').innerHTML = todoListHTML;
+
+document.querySelectorAll('.js-delete-button')
+.forEach((deleteButton, index)=>{
+
+deleteButton.addEventListener('click', ()=>{
+  myArray3.splice(index,1); displayArray();
+})
+
+});
+};
+
+
+
+document.querySelector('.js-add-button')
+.addEventListener('click',()=>{
+  todo3();
+})
+
+</script>
+
+</body>
+</html>
